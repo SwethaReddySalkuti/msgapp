@@ -1,21 +1,20 @@
-//core module import
 const express= require('express');
 const bodyParser=require('body-parser');
 const cors=require('cors');
 require('dotenv').config();
 
-//database import
+
 const sequalize=require('./util/database')
 
 
 
-//module imort function
+
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
-    origin:'*', //origin not found 
+    origin:'*',  
     methods:['GET','POST','DELETE','PUT'],
     credentials:true
 }));
@@ -23,14 +22,14 @@ app.use(express.json());
 
 
 
-//router import
+
 const signupRouter=require('./route/signupRouter');
 const loginRouter=require('./route/loginRoute');
 const messageRouter=require('./route/messageRouter');
 const groupRouter=require('./route/groupRouter');
 const resetPasswordRoutes = require('./route/resetpassword');
 
-//module import
+
 const User=require('./module/signup');
 const Message=require('./module/message');
 const Group = require('./module/group')
@@ -54,7 +53,7 @@ Message.belongsTo(Group,{constraints: true, onDelete: 'CASCADE'});
 
 
 sequalize.sync(
-    //{force : true}
+  //  {force : true}
 ).then(()=>{
     console.log('sync');
     app.listen(3000);

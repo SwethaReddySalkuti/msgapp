@@ -4,16 +4,21 @@ const User=require('../module/signup')
 const Group=require('../module/group');
 const message = require('../module/message');
 const AWS=require('aws-sdk');
+const sequelize = require('../util/database');
+const { QueryTypes } = require('sequelize');
 require('dotenv').config();
 
 module.exports.messageSent=async(req,res,next)=>{
-    await Message.create({
+    const result = await Message.create({
         message:req.body.message,
         userId:req.user.id,
         groupId:req.body.groupid
-    }).then(result=>{
-        console.log(result);
     })
+    const userName = await sequelize.query(`SELECT name FROM users WHERE id = ${req.user.id} `, { type: QueryTypes.SELECT });
+        console.log('haiiiiiiiiii');
+        const username = userName[0].name;
+        res.json({message:req.body.message , username : username})
+
 };
 
 module.exports.getreply=async(req,res,next)=>{

@@ -3,16 +3,19 @@
   margin: 0;
   font-family: sans-serif;
   box-sizing: border-box;
+  
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background: url('chat_background.png');
-    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('chat_background.png');
+    height: 100%;
+    background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
+    background-size: cover;
   }
   
   header {
@@ -27,7 +30,7 @@ body {
   }
 
   .header-title {
-    margin: 350px;
+    margin: 200px;
     flex-grow: 1;
     color:white;
     font-weight: bold;
@@ -63,13 +66,11 @@ body {
     justify-content: space-around;
     text-align: center;
     align-items: center;
-    
   }
   .footer-form {
     text-align: center;
     flex-grow: 1;
     color:rgb(17, 4, 201);
-    margin: 100px;
   }
 
   #messageButton {
@@ -140,39 +141,37 @@ button:hover{
   height: 100%;
   display:flex;
   align-items: center;
-  background: transparent;
+  background-color: #000;
+  margin-top: 300px;
+  
 }
 .container{
   position: relative;
   width: 1396px;
   max-width: 100%;
-  background: white;
   height: calc(100vh-40px);
-  
+  display: flex;
+  margin-top: 3%;
+
 
 }
-.pull-left{
+.container .pull-left{
   position: relative;
   flex-basis: 30%;
   text-align: start;
   align-items: start;
   background-color: white;
+  height: 470px;
 }
-.pull-left2{
+
+.container .pull-right{
   position: relative;
-  flex-basis: 30%;
-  text-align: start;
-  align-items: start;
-  background: transparent;
-}
-.pull-right{
-  position: relative;
-  flex-basis: 60%;
+  flex-basis: 70%;
   justify-content: left;
   align-items: left;
   border-right: 1px solid #000;
   background-image: url('messback.jpg');
-  height: 400px;
+  height: 470px;
   width: 60%;
 }
 .pull-right2{
@@ -203,6 +202,6 @@ button:hover{
 #groups{
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0px;
 }
 

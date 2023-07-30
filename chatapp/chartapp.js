@@ -1,5 +1,14 @@
 
-/*const socket = io('http://localhost:3000')
+/*
+
+<form enctype="multipart/form-data" id="image">
+                            <label for="file"><i style="background-color: #913175; border-color: #CD5888;" class="material-icons btn btn-primary">attachment</i></label>
+                            <input type="file" id="file" style="display:none;" name="file">
+                            <button id="sendAttachmentButton" style="background-color: #913175; border-color: #CD5888;" class="btn btn-primary btn-sm">send</button>
+                        </form>
+
+const socket = io('http://localhost:3000')
+
 
 const messageContainer = document.getElementById('message-container')
 const messageForm = document.getElementById('send-container')
@@ -57,7 +66,7 @@ document.addEventListener('DOMContentLoaded',async(e)=>{
 async function findGroup(group){
     let groups = document.getElementById('groups');
     let groupButton = document.createElement('button');
-    groupButton.innerHTML=group.name + " id: " + group.id;
+    groupButton.innerHTML=group.name ;
     const buttonid=group.id;
     groupButton.id=buttonid;
     groups.appendChild(groupButton);
@@ -73,7 +82,7 @@ async function findGroup(group){
 
         //add user button
         const adduserButton=document.createElement('button');
-        adduserButton.innerHTML= 'Add-user in'+group.name;
+        adduserButton.innerHTML= 'Add User';
         messageContainer.appendChild(adduserButton)
         adduserButton.onclick=(event)=>{
             event.preventDefault();
@@ -83,8 +92,8 @@ async function findGroup(group){
 
         // remove user button 
         const removeuserbutton=document.createElement('button')
-        removeuserbutton.innerHTML='Romeove from'+group.name;
-        removeuserbutton.style.background='red';
+        removeuserbutton.innerHTML='Remove User';
+        removeuserbutton.style.background='#0275d8';
         messageContainer.appendChild(removeuserbutton);
         removeuserbutton.onclick=(event)=>{
             event.preventDefault();
@@ -162,12 +171,15 @@ async function sendmessage(groupid){
         console.log(message)
         const token = localStorage.getItem('token');
         console.log(token)
-        await axios.post('http://localhost:3000/user/message',{message:message,groupid:groupid},{headers:{'Authorization':token}}).then(response=>{
-            console.log(response);
-        }).catch((err)=>{
-            console.log(err);
-        })
-        
+        const response = await axios.post('http://localhost:3000/user/message',{message:message,groupid:groupid},{headers:{'Authorization':token}})
+        console.log(response.data);
+        const reply = {
+            user : {
+                name : response.data.username
+            },
+            message : response.data.message
+        }
+        show(reply);
     });
 }
 
@@ -248,6 +260,7 @@ function compareObjects(obj1, obj2) {
         const { width } = mesageshow.getBoundingClientRect();
         mesageshow.style.width = `${width}px`;
         mesageshow.style.whiteSpace = 'nowrap';
+        mesageshow.style.marginLeft = '20px';
         messageBox.appendChild(mesageshow);
   }
 /*.container.pull-right::before{
